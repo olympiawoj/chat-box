@@ -24,11 +24,12 @@ export default function App() {
     <div className="app">
       <div className="walkthrough">
         {messages.map((message, index) => {
+          const even = index % 2 === 0;
           //logic goes here
                     
           // are we supposed to show a typing indicator?
           if(messageToShow + 1 === index){
-            return <div key="index">I am typing</div>
+            return <Typing key="index" even={even}/>
           }
           // are we supposed to show this message?
           if(index > messageToShow) return <div key={index}/>
@@ -38,6 +39,18 @@ export default function App() {
       </div>
     </div>
   );
+}
+
+function Typing({even}){
+    return (
+      <div className={`typing ${even ? 'is-right' : 'is-left'}`}>
+        <div className="dots">
+          <div/>
+          <div/>
+          <div/>
+        </div>
+      </div>
+    )
 }
 
 function Message({message, index}){
